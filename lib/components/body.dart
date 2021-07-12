@@ -138,7 +138,7 @@ class _BodyDetailState extends State<BodyDetail> {
                     MaterialButton(
                       onPressed: () {
                         setState(() {
-                          if (quantity > 0) {
+                          if (quantity > 1) {
                             quantity--;
                           }
                         });
