@@ -13,18 +13,18 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen>
     with TickerProviderStateMixin {
   late AnimationController animationController;
-  late Animation bgColor, textColor, elevation;
-  bool favotire = false;
+  late Animation bgColor, textColor;
+  bool favorite = false;
 
   @override
   void initState() {
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    bgColor = ColorTween(begin: Colors.transparent, end: lightPurpleColor)
+    bgColor = ColorTween(begin: Colors.transparent, end: whiteColor)
         .animate(animationController);
     textColor = ColorTween(begin: whiteColor, end: secondaryColor)
         .animate(animationController);
-    elevation = Tween<double>(begin: 0, end: 4).animate(animationController);
+
     super.initState();
   }
 
@@ -37,17 +37,14 @@ class _DetailScreenState extends State<DetailScreen>
         child: Stack(
           children: [
             BodyDetail(),
-            AppBarHome(
+            AppBarDetail(
               animationController: animationController,
               bgColor: bgColor,
               textColor: textColor,
-              favotire: favotire,
-              elevation: elevation,
-              onTap: () {
+              favorite: favorite,
+              favoriteTap: () {
                 setState(() {
-                  setState(() {
-                    favotire = favotire ? false : true;
-                  });
+                  favorite = favorite ? false : true;
                 });
               },
             ),
@@ -60,7 +57,7 @@ class _DetailScreenState extends State<DetailScreen>
   bool scrollNotification(ScrollNotification notification) {
     bool scroll = false;
     if (notification.metrics.axis == Axis.vertical) {
-      animationController.animateTo(notification.metrics.pixels / 80);
+      animationController.animateTo(notification.metrics.pixels / 20);
       scroll = true;
     }
 

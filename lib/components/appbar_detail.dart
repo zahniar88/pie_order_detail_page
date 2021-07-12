@@ -2,62 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pie_detail_page/constant.dart';
 
-class AppBarHome extends StatelessWidget {
-  const AppBarHome({
+class AppBarDetail extends StatelessWidget {
+  const AppBarDetail({
     Key? key,
-    required this.animationController,
     required this.bgColor,
     required this.textColor,
-    required this.favotire,
-    required this.onTap,
-    required this.elevation,
+    required this.animationController,
+    required this.favorite,
+    required this.favoriteTap,
   }) : super(key: key);
 
+  final Animation bgColor, textColor;
   final AnimationController animationController;
-  final Animation bgColor, textColor, elevation;
-  final bool favotire;
-  final GestureTapCallback onTap;
+  final bool favorite;
+  final GestureTapCallback favoriteTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 104,
+      height: 100,
       child: AnimatedBuilder(
         animation: animationController,
-        builder: (context, _) {
+        builder: (context, child) {
           return AppBar(
             backgroundColor: bgColor.value,
-            elevation: elevation.value,
-            centerTitle: true,
+            elevation: 0,
             title: Text(
               "Pie Detail",
               style: TextStyle(
-                color: textColor.value,
-                fontWeight: FontWeight.w600,
                 fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: textColor.value,
               ),
             ),
+            centerTitle: true,
             leading: Padding(
               padding: EdgeInsets.only(left: space),
-              child: Icon(
-                FontAwesomeIcons.angleLeft,
-                color: textColor.value,
+              child: InkWell(
+                onTap: (){},
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                child: Icon(
+                  FontAwesomeIcons.angleLeft,
+                  color: textColor.value,
+                ),
               ),
             ),
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: space),
                 child: InkWell(
-                  onTap: onTap,
-                  child: favotire
-                      ? Icon(
-                          FontAwesomeIcons.solidHeart,
-                          color: orangeColor,
-                        )
-                      : Icon(
-                          FontAwesomeIcons.heart,
-                          color: textColor.value,
-                        ),
+                  onTap: favoriteTap,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  child: Icon(
+                    favorite
+                        ? FontAwesomeIcons.solidHeart
+                        : FontAwesomeIcons.heart,
+                    color: favorite ? orangeColor : textColor.value,
+                    size: 20,
+                  ),
                 ),
               ),
             ],
