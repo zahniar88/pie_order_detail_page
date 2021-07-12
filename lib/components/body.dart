@@ -13,8 +13,11 @@ class BodyDetail extends StatefulWidget {
 class _BodyDetailState extends State<BodyDetail> {
   int quantity = 1;
   int price = 59999;
-  NumberFormat rupiah =
-      NumberFormat.currency(locale: "ID", name: "IDR ", decimalDigits: 0);
+  NumberFormat rupiah = NumberFormat.currency(
+    locale: "ID",
+    name: "IDR ",
+    decimalDigits: 0,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class _BodyDetailState extends State<BodyDetail> {
                   ),
                 ),
                 Text(
-                  "IDR 59.999",
+                  rupiah.format(price),
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
